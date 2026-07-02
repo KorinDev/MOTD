@@ -15,15 +15,6 @@ def install():
     shutil.copy(MOTD_SRC, BIN_DIR / "motd")
     os.chmod(BIN_DIR / "motd", 0o755)
     
-    alias_line = 'alias motd="motd"'
-    if BASH_RC.exists():
-        with open(BASH_RC, 'r') as f:
-            content = f.read()
-        if alias_line not in content:
-            with open(BASH_RC, 'a') as f:
-                f.write(f"\n# MOTD alias\n{alias_line}\n")
-            print("Added alias to .bashrc")
-    
     motd_file = HOME / ".motd"
     if not motd_file.exists():
         with open(motd_file, 'w') as f:
